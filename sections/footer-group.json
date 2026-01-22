@@ -114,7 +114,7 @@
         "menu_8tJbUk": {
           "type": "menu",
           "settings": {
-            "menu": "footer",
+            "menu": "",
             "heading": "Shop",
             "menu_spacing": 12,
             "show_as_accordion": false,
@@ -320,8 +320,8 @@
       ],
       "settings": {
         "section_width": "page-width",
-        "gap": 24,
-        "divider_thickness": 1,
+        "gap": 8,
+        "divider_thickness": 2.5,
         "color_scheme": "scheme-5",
         "padding-block-start": 20,
         "padding-block-end": 18
