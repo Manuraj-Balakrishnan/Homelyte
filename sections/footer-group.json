@@ -69,9 +69,9 @@
                 "width": "fill",
                 "custom_width": 100,
                 "inherit_color_scheme": true,
+                "color_scheme": "scheme-4",
                 "heading": "",
                 "heading_preset": "h3",
-                "color_scheme": "scheme-4",
                 "border_style": "all",
                 "border_width": 0,
                 "border_radius": 100,
@@ -95,6 +95,7 @@
           ]
         }
       },
+      "disabled": true,
       "name": "t:names.media_with_text",
       "settings": {
         "media_position": "left",
@@ -102,8 +103,8 @@
         "media_height": "auto",
         "section_width": "full-width",
         "extend_media": true,
-        "color_scheme": "scheme-e1e09ff5-6396-47cd-ad7a-c05470cf2a2e",
-        "padding-block-start": 0,
+        "color_scheme": "scheme-79cf3de2-914d-4b09-a2ac-58e79fb13e29",
+        "padding-block-start": 20,
         "padding-block-end": 0
       }
     },
@@ -260,19 +261,33 @@
             "text_jBr8nr",
             "social_links_JBkCiP"
           ]
+        },
+        "payment_icons_GPijqk": {
+          "type": "payment-icons",
+          "name": "t:names.payment_icons",
+          "settings": {
+            "horizontal_alignment": "center",
+            "gap": 10,
+            "padding-block-start": 10,
+            "padding-block-end": 10,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "menu_8tJbUk",
         "menu_jRmAQi",
         "menu_6jWwP4",
-        "group_hAzkCn"
+        "group_hAzkCn",
+        "payment_icons_GPijqk"
       ],
       "name": "Footer",
       "settings": {
         "section_width": "page-width",
         "gap": 12,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-5",
         "padding-block-start": 36,
         "padding-block-end": 18
       }
@@ -283,8 +298,8 @@
         "copyright": {
           "type": "footer-copyright",
           "settings": {
-            "show_powered_by": true,
-            "font_size": "0.75rem",
+            "show_powered_by": false,
+            "font_size": "0.875rem",
             "case": "none"
           },
           "blocks": {}
@@ -293,7 +308,7 @@
           "type": "footer-policy-list",
           "name": "t:names.policy_list",
           "settings": {
-            "font_size": "0.75rem",
+            "font_size": "0.875rem",
             "case": "none"
           },
           "blocks": {}
@@ -307,7 +322,7 @@
         "section_width": "page-width",
         "gap": 24,
         "divider_thickness": 1,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-5",
         "padding-block-start": 20,
         "padding-block-end": 18
       }
