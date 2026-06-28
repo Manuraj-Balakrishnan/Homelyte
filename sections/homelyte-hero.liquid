@@ -1,0 +1,178 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div
+  class="hl-hero hl-section color-{{ s.color_scheme }} hl-align-{{ s.content_alignment }}"
+  style="--hl-pt: {{ s.padding_top }}px; --hl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="hl-hero__media">
+    {%- if s.image != blank -%}
+      {%- assign mobile_img = s.image_mobile | default: s.image -%}
+      {%- assign hero_alt = s.image.alt | default: s.heading | strip_html -%}
+      <picture class="hl-hero__picture">
+        {%- if s.image_mobile != blank -%}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ mobile_img | image_url: width: 600 }} 600w, {{ mobile_img | image_url: width: 800 }} 800w, {{ mobile_img | image_url: width: 1000 }} 1000w, {{ mobile_img | image_url: width: 1200 }} 1200w"
+            sizes="100vw"
+            width="{{ mobile_img.width }}"
+            height="{{ mobile_img.height }}"
+          >
+        {%- endif -%}
+        {{
+          s.image
+          | image_url: width: 3000
+          | image_tag: loading: 'eager', fetchpriority: 'high', widths: '800, 1200, 1600, 2000, 2600, 3000', sizes: '100vw', class: 'hl-hero__img', alt: hero_alt
+        }}
+      </picture>
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'hl-hero__img hl-hero__img--placeholder' }}
+    {%- endif -%}
+  </div>
+
+  <div class="hl-hero__inner hl-container">
+    <div class="hl-hero__content">
+      {%- if s.eyebrow != blank -%}
+        <span class="hl-eyebrow" data-hl-reveal>{{ s.eyebrow }}</span>
+      {%- endif -%}
+      {%- if s.heading != blank -%}
+        <h1 class="hl-heading hl-heading--xl hl-hero__heading" data-hl-reveal style="--hl-reveal-delay: 80ms;">
+          {{ s.heading }}
+        </h1>
+      {%- endif -%}
+      {%- if s.description != blank -%}
+        <div class="hl-text hl-hero__text" data-hl-reveal style="--hl-reveal-delay: 160ms;">
+          {{ s.description }}
+        </div>
+      {%- endif -%}
+      {%- if s.button_label != blank or s.button_label_2 != blank -%}
+        <div class="hl-hero__buttons" data-hl-reveal style="--hl-reveal-delay: 240ms;">
+          {%- if s.button_label != blank -%}
+            <a class="hl-btn hl-btn--primary" href="{{ s.button_link | default: '#' }}">{{ s.button_label }}</a>
+          {%- endif -%}
+          {%- if s.button_label_2 != blank -%}
+            <a class="hl-btn hl-btn--on-media" href="{{ s.button_link_2 | default: '#' }}">{{ s.button_label_2 }}</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hl-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-top: var(--hl-pt, 0px);
+    padding-bottom: var(--hl-pb, 0px);
+  }
+
+  .hl-hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hl-hero__picture {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hl-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    animation: hl-hero-zoom 14s var(--hl-ease) forwards;
+  }
+
+  .hl-hero__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding-block: clamp(96px, 14vh, 180px);
+  }
+
+  .hl-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 640px;
+  }
+
+  .hl-align-center .hl-hero__content {
+    max-width: 760px;
+    margin-inline: auto;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hl-align-right .hl-hero__content {
+    margin-left: auto;
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .hl-hero__heading { color: var(--color-foreground-heading); }
+  .hl-hero__text { max-width: 48ch; opacity: 0.92; }
+
+  .hl-hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 0.75rem;
+  }
+
+  @keyframes hl-hero-zoom {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hl-hero__img { animation: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homelyte Hero",
+  "tag": "section",
+  "class": "hl-section-wrapper hl-hero-wrapper",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Premium Home Organization" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Organize Better. Live Better." },
+    { "type": "richtext", "id": "description", "label": "Description", "default": "<p>Premium home organization solutions designed for modern Indian homes.</p>" },
+    { "type": "header", "content": "Buttons" },
+    { "type": "text", "id": "button_label", "label": "Primary button label", "default": "Shop Collection" },
+    { "type": "url", "id": "button_link", "label": "Primary button link" },
+    { "type": "text", "id": "button_label_2", "label": "Secondary button label", "default": "Explore Kitchen" },
+    { "type": "url", "id": "button_link_2", "label": "Secondary button link" },
+    { "type": "header", "content": "Media" },
+    { "type": "image_picker", "id": "image", "label": "Background image (desktop)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Background image (mobile)" },
+    { "type": "header", "content": "Layout" },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-5" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 5, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 5, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Homelyte Hero" }]
+}
+{% endschema %}

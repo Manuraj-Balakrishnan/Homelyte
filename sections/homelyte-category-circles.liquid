@@ -1,0 +1,149 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div
+  class="hl-cats hl-section color-{{ s.color_scheme }}"
+  style="--hl-pt: {{ s.padding_top }}px; --hl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="hl-container">
+    {%- if s.heading != blank or s.eyebrow != blank -%}
+      <div class="hl-section__head hl-section__head--center">
+        {%- if s.eyebrow != blank -%}<span class="hl-eyebrow" data-hl-reveal>{{ s.eyebrow }}</span>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="hl-heading hl-heading--lg" data-hl-reveal>{{ s.heading }}</h2>{%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ul class="hl-cats__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="hl-cats__item" data-hl-reveal style="--hl-reveal-delay: {{ forloop.index0 | times: 70 }}ms;" {{ block.shopify_attributes }}>
+          <a class="hl-cats__link" href="{{ block.settings.link | default: '#' }}">
+            <span class="hl-cats__circle">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '200, 300, 400, 600',
+                    sizes: '(min-width: 750px) 200px, 40vw',
+                    class: 'hl-cats__img',
+                    alt: block.settings.title | default: block.settings.image.alt
+                }}
+              {%- else -%}
+                {{ 'collection-1' | placeholder_svg_tag: 'hl-cats__img' }}
+              {%- endif -%}
+            </span>
+            <span class="hl-cats__label">{{ block.settings.title }}</span>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hl-cats__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: clamp(16px, 2.5vw, 40px);
+  }
+
+  .hl-cats__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--color-foreground);
+  }
+
+  .hl-cats__circle {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--color-background);
+    box-shadow: var(--hl-shadow-sm);
+    border: 1px solid var(--color-border);
+    transition: transform 0.45s var(--hl-ease), box-shadow 0.45s var(--hl-ease);
+  }
+
+  .hl-cats__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--hl-ease);
+  }
+
+  .hl-cats__link:hover .hl-cats__circle {
+    transform: translateY(-6px);
+    box-shadow: var(--hl-shadow-md);
+  }
+
+  .hl-cats__link:hover .hl-cats__img { transform: scale(1.08); }
+
+  .hl-cats__link:focus-visible .hl-cats__circle {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  .hl-cats__label {
+    font-family: var(--font-body--family);
+    font-weight: 600;
+    font-size: clamp(0.95rem, 1.2vw, 1.0625rem);
+    text-align: center;
+  }
+
+  @media (max-width: 990px) {
+    .hl-cats__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .hl-cats__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homelyte Categories",
+  "tag": "section",
+  "class": "hl-section-wrapper",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Find Your Space" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Shop by Category" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Kitchen" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homelyte Categories",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Kitchen" } },
+        { "type": "category", "settings": { "title": "Bathroom" } },
+        { "type": "category", "settings": { "title": "Storage" } },
+        { "type": "category", "settings": { "title": "Laundry" } },
+        { "type": "category", "settings": { "title": "Pantry" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

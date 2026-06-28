@@ -1,0 +1,215 @@
+{%- liquid
+  assign s = section.settings
+  assign collection = collections[s.collection]
+  assign limit = s.products_to_show
+  assign columns = s.columns
+-%}
+
+<div
+  class="hl-pgrid hl-section color-{{ s.color_scheme }} hl-pgrid--{{ s.layout }}"
+  style="--hl-pt: {{ s.padding_top }}px; --hl-pb: {{ s.padding_bottom }}px; --hl-cols: {{ columns }};"
+>
+  <div class="hl-container">
+    <div class="hl-section__head hl-section__head--row">
+      <div>
+        {%- if s.eyebrow != blank -%}<span class="hl-eyebrow" data-hl-reveal>{{ s.eyebrow }}</span>{%- endif -%}
+        {%- if s.heading != blank -%}<h2 class="hl-heading hl-heading--lg" data-hl-reveal>{{ s.heading }}</h2>{%- endif -%}
+      </div>
+      {%- if s.button_label != blank -%}
+        <a class="hl-btn hl-btn--ghost hl-pgrid__head-btn" href="{{ s.button_link | default: collection.url | default: '#' }}" data-hl-reveal>{{ s.button_label }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="hl-pgrid__track product-grid">
+      {%- if collection.products.size > 0 -%}
+        {%- for product in collection.products limit: limit -%}
+          <div class="hl-pgrid__cell" data-hl-reveal style="--hl-reveal-delay: {{ forloop.index0 | times: 70 }}ms;">
+            {% # theme-check-disable UniqueStaticBlockId %}
+            {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+            {% # theme-check-enable UniqueStaticBlockId %}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..columns) -%}
+          <div class="hl-pgrid__cell" data-hl-reveal style="--hl-reveal-delay: {{ forloop.index0 | times: 70 }}ms;">
+            {% # theme-check-disable UniqueStaticBlockId %}
+            {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: null %}
+            {% # theme-check-enable UniqueStaticBlockId %}
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hl-pgrid__track {
+    display: grid;
+    grid-template-columns: repeat(var(--hl-cols, 4), 1fr);
+    gap: clamp(16px, 2vw, 28px);
+  }
+
+  .hl-pgrid--slider .hl-pgrid__track {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(260px, calc((100% - (var(--hl-cols, 4) - 1) * 28px) / var(--hl-cols, 4)));
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--hl-page-pad);
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+
+  .hl-pgrid--slider .hl-pgrid__cell { scroll-snap-align: start; }
+
+  .hl-pgrid__cell product-card,
+  .hl-pgrid__cell product-card-link {
+    width: 100%;
+  }
+
+  @media (max-width: 990px) {
+    .hl-pgrid:not(.hl-pgrid--slider) .hl-pgrid__track { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .hl-pgrid:not(.hl-pgrid--slider) .hl-pgrid__track { grid-template-columns: repeat(2, 1fr); }
+    .hl-pgrid--slider .hl-pgrid__track { grid-auto-columns: 72vw; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homelyte Products",
+  "tag": "section",
+  "class": "hl-section-wrapper",
+  "blocks": [
+    { "type": "@theme" },
+    { "type": "@app" }
+  ],
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer Favourites" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Featured Collection" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 12, "step": 1, "default": 5 },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "slider", "label": "Horizontal slider" }
+      ],
+      "default": "grid"
+    },
+    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 3, "max": 5, "step": 1, "default": 5 },
+    { "type": "paragraph", "content": "Product card layout, Quick Add, hover effects and badges are controlled in Theme settings → Product cards, and in the product card blocks below." },
+    { "type": "header", "content": "Header button" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "View all" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [
+    {
+      "name": "Homelyte Products — Grid",
+      "settings": { "layout": "grid", "heading": "Featured Collection" },
+      "blocks": {
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "border": "none",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "portrait",
+                "border": "none",
+                "border_radius": 0
+              }
+            },
+            "product_title": {
+              "type": "product-title",
+              "settings": {
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "padding-block-start": 12
+              }
+            },
+            "price": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem"
+              }
+            },
+            "swatches": {
+              "type": "swatches",
+              "settings": {}
+            }
+          },
+          "block_order": ["product-card-gallery", "product_title", "price", "swatches"]
+        }
+      }
+    },
+    {
+      "name": "Homelyte Products — Best Sellers Slider",
+      "settings": { "layout": "slider", "heading": "Best Sellers", "eyebrow": "Loved by thousands", "columns": 4 },
+      "blocks": {
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "border": "none",
+            "border_radius": 0
+          },
+          "blocks": {
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
+              "settings": { "image_ratio": "square", "border": "none" }
+            },
+            "product_title": {
+              "type": "product-title",
+              "settings": {
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "padding-block-start": 12
+              }
+            },
+            "price": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem"
+              }
+            },
+            "swatches": {
+              "type": "swatches",
+              "settings": {}
+            }
+          },
+          "block_order": ["product-card-gallery", "product_title", "price", "swatches"]
+        }
+      }
+    }
+  ]
+}
+{% endschema %}

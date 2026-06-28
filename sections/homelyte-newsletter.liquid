@@ -1,0 +1,127 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div
+  class="hl-news hl-section color-{{ s.color_scheme }}"
+  style="--hl-pt: {{ s.padding_top }}px; --hl-pb: {{ s.padding_bottom }}px;"
+>
+  {%- if s.image != blank -%}
+    <div class="hl-news__bg" aria-hidden="true">
+      {{ s.image | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '800,1200,1800,2400', sizes: '100vw', class: 'hl-news__bg-img', alt: '' }}
+      <span class="hl-news__bg-overlay"></span>
+    </div>
+  {%- endif -%}
+
+  <div class="hl-container hl-news__inner">
+    <div class="hl-news__content" data-hl-reveal>
+      {%- if s.eyebrow != blank -%}<span class="hl-eyebrow hl-news__eyebrow">{{ s.eyebrow }}</span>{%- endif -%}
+      {%- if s.heading != blank -%}<h2 class="hl-heading hl-heading--lg hl-news__heading">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.subtext != blank -%}<div class="hl-text hl-news__subtext">{{ s.subtext }}</div>{%- endif -%}
+
+      {%- form 'customer', class: 'hl-news__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="hl-news__success" role="status">🎉 {{ s.success_text | default: "You're in! Check your inbox for your 10% off code." }}</p>
+        {%- else -%}
+          <div class="hl-news__field">
+            <label class="visually-hidden" for="hl-news-email-{{ section.id }}">Email</label>
+            <input
+              type="email"
+              id="hl-news-email-{{ section.id }}"
+              name="contact[email]"
+              class="hl-news__input"
+              placeholder="{{ s.placeholder | default: 'Enter your email' }}"
+              autocomplete="email"
+              required
+            >
+            <button type="submit" class="hl-btn hl-btn--primary hl-news__submit">{{ s.button_label | default: 'Subscribe' }}</button>
+          </div>
+          {%- if form.errors -%}
+            <p class="hl-news__error" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if s.disclaimer != blank -%}<p class="hl-news__disclaimer">{{ s.disclaimer }}</p>{%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hl-news { position: relative; overflow: hidden; }
+
+  .hl-news__bg { position: absolute; inset: 0; z-index: 0; }
+  .hl-news__bg-img { width: 100%; height: 100%; object-fit: cover; }
+  .hl-news__bg-overlay { position: absolute; inset: 0; background: rgb(0 0 0 / 45%); }
+
+  .hl-news__inner { position: relative; z-index: 1; }
+
+  .hl-news__content {
+    max-width: 640px;
+    margin-inline: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hl-news__form { width: 100%; max-width: 520px; margin-top: 0.6rem; }
+
+  .hl-news__field {
+    display: flex;
+    gap: 0.6rem;
+    background: var(--color-input-background, #fff);
+    border: 1px solid var(--color-input-border, var(--hl-border));
+    border-radius: var(--hl-radius-pill);
+    padding: 0.4rem 0.4rem 0.4rem 1.2rem;
+  }
+
+  .hl-news__input {
+    flex: 1 1 auto;
+    border: none;
+    background: transparent;
+    font-family: var(--font-body--family);
+    font-size: 1rem;
+    color: var(--color-input-text, var(--hl-black));
+    outline: none;
+    min-width: 0;
+  }
+
+  .hl-news__submit { white-space: nowrap; flex: 0 0 auto; }
+
+  .hl-news__success { font-weight: 600; font-family: var(--font-body--family); }
+  .hl-news__error { color: #d23f3f; font-size: 0.875rem; margin: 0.5rem 0 0; }
+  .hl-news__disclaimer { font-size: 0.8rem; opacity: 0.65; margin: 0; }
+
+  @media (max-width: 560px) {
+    .hl-news__field { flex-direction: column; padding: 0.6rem; border-radius: var(--hl-radius); }
+    .hl-news__input { padding: 0.6rem; text-align: center; }
+    .hl-news__submit { width: 100%; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homelyte Newsletter",
+  "tag": "section",
+  "class": "hl-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "10% OFF Your First Order" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Join the Homelyte Family" },
+    { "type": "richtext", "id": "subtext", "label": "Subtext", "default": "<p>Get 10% off your first order, plus early access to new drops and organizing tips.</p>" },
+    { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Enter your email" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "You're in! Check your inbox for your 10% off code." },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer", "default": "No spam. Unsubscribe anytime." },
+    { "type": "header", "content": "Background" },
+    { "type": "image_picker", "id": "image", "label": "Background image (optional)" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 5, "unit": "px", "default": 110 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 5, "unit": "px", "default": 110 }
+  ],
+  "presets": [{ "name": "Homelyte Newsletter" }]
+}
+{% endschema %}

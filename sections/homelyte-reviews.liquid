@@ -1,0 +1,149 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div
+  class="hl-reviews hl-section color-{{ s.color_scheme }}"
+  style="--hl-pt: {{ s.padding_top }}px; --hl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="hl-container">
+    <div class="hl-section__head hl-section__head--center">
+      {%- if s.eyebrow != blank -%}<span class="hl-eyebrow" data-hl-reveal>{{ s.eyebrow }}</span>{%- endif -%}
+      {%- if s.heading != blank -%}<h2 class="hl-heading hl-heading--lg" data-hl-reveal>{{ s.heading }}</h2>{%- endif -%}
+    </div>
+
+    <div class="hl-reviews__track">
+      {%- for block in section.blocks -%}
+        {%- assign r = block.settings -%}
+        <figure class="hl-reviews__card" data-hl-reveal style="--hl-reveal-delay: {{ forloop.index0 | times: 80 }}ms;" {{ block.shopify_attributes }}>
+          {%- if r.image != blank -%}
+            <div class="hl-reviews__media">
+              {{ r.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300,500,700,800', sizes: '(min-width:750px) 33vw, 80vw', class: 'hl-reviews__img', alt: r.name }}
+            </div>
+          {%- endif -%}
+          <figcaption class="hl-reviews__body">
+            {% render 'homelyte-rating', rating: r.rating %}
+            <blockquote class="hl-reviews__quote">{{ r.quote }}</blockquote>
+            <div class="hl-reviews__author">
+              <span class="hl-reviews__name">{{ r.name }}</span>
+              {%- if r.verified -%}
+                <span class="hl-reviews__verified">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 1.8 3 .2.9 2.9 2.2 2-1 2.9 1 2.9-2.2 2-.9 2.9-3 .2L12 22l-2.4-1.8-3-.2-.9-2.9-2.2-2 1-2.9-1-2.9 2.2-2 .9-2.9 3-.2L12 2z"/><path d="m8.5 12 2.3 2.3 4.7-4.7" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Verified Buyer
+                </span>
+              {%- endif -%}
+            </div>
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hl-reviews__track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 2.5vw, 32px);
+  }
+
+  .hl-reviews__card {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--hl-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--hl-shadow-sm);
+    transition: transform 0.4s var(--hl-ease), box-shadow 0.4s var(--hl-ease);
+  }
+
+  .hl-reviews__card:hover { transform: translateY(-6px); box-shadow: var(--hl-shadow-md); }
+
+  .hl-reviews__media { aspect-ratio: 4 / 3; overflow: hidden; }
+  .hl-reviews__img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--hl-ease); }
+  .hl-reviews__card:hover .hl-reviews__img { transform: scale(1.05); }
+
+  .hl-reviews__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: clamp(20px, 2vw, 30px);
+    flex: 1 1 auto;
+  }
+
+  .hl-reviews__quote {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--color-foreground);
+  }
+
+  .hl-reviews__author { display: flex; align-items: center; gap: 0.6rem; margin-top: auto; flex-wrap: wrap; }
+  .hl-reviews__name { font-weight: 600; font-family: var(--font-body--family); }
+
+  .hl-reviews__verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--hl-green);
+  }
+
+  .hl-reviews__verified svg { width: 18px; height: 18px; }
+
+  @media (max-width: 990px) {
+    .hl-reviews__track {
+      grid-auto-flow: column;
+      grid-template-columns: none;
+      grid-auto-columns: 80%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: var(--hl-page-pad);
+    }
+    .hl-reviews__card { scroll-snap-align: start; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homelyte Reviews",
+  "tag": "section",
+  "class": "hl-section-wrapper",
+  "max_blocks": 9,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Loved by 50,000+ homes" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Real Homes, Real Results" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "range", "id": "rating", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "quote", "label": "Review", "default": "Completely transformed my kitchen. Everything finally has its place!" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Aisha M." },
+        { "type": "checkbox", "id": "verified", "label": "Verified buyer", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homelyte Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Aisha M.", "quote": "Completely transformed my kitchen. Everything finally has its place!" } },
+        { "type": "review", "settings": { "name": "Rohan K.", "quote": "Premium quality and so easy to clean. Worth every rupee." } },
+        { "type": "review", "settings": { "name": "Neha & Arjun", "quote": "Our tiny apartment feels twice as big now. Obsessed!" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,155 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div
+  class="hl-why hl-section color-{{ s.color_scheme }}"
+  style="--hl-pt: {{ s.padding_top }}px; --hl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="hl-container">
+    <div class="hl-section__head hl-section__head--center">
+      {%- if s.eyebrow != blank -%}<span class="hl-eyebrow" data-hl-reveal>{{ s.eyebrow }}</span>{%- endif -%}
+      {%- if s.heading != blank -%}<h2 class="hl-heading hl-heading--lg" data-hl-reveal>{{ s.heading }}</h2>{%- endif -%}
+    </div>
+
+    <ul class="hl-why__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="hl-why__card" data-hl-reveal style="--hl-reveal-delay: {{ forloop.index0 | times: 80 }}ms;" {{ block.shopify_attributes }}>
+          <span class="hl-why__icon" aria-hidden="true">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,120', class: 'hl-why__icon-img', alt: '' }}
+            {%- else -%}
+              {%- case block.settings.icon -%}
+                {%- when 'leaf' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-6 6-9 16-9 0 10-3 16-9 16Z"/><path d="M5 20c4-6 9-9 14-10"/></svg>
+                {%- when 'shield' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+                {%- when 'box' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+                {%- when 'sparkle' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M6 6l12 12M18 6 6 18"/></svg>
+                {%- when 'clock' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>
+              {%- endcase -%}
+            {%- endif -%}
+          </span>
+          <h3 class="hl-why__title">{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}<p class="hl-why__text">{{ block.settings.text }}</p>{%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hl-why__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+  }
+
+  .hl-why__card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: clamp(24px, 2.6vw, 38px);
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--hl-radius);
+    box-shadow: var(--hl-shadow-sm);
+    transition: transform 0.4s var(--hl-ease), box-shadow 0.4s var(--hl-ease);
+  }
+
+  .hl-why__card:hover { transform: translateY(-6px); box-shadow: var(--hl-shadow-md); }
+
+  .hl-why__icon {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--hl-light-green);
+    color: var(--hl-green);
+  }
+
+  .hl-why__icon svg { width: 28px; height: 28px; }
+  .hl-why__icon-img { width: 32px; height: 32px; object-fit: contain; }
+
+  .hl-why__title {
+    font-family: var(--font-heading--family);
+    font-weight: var(--font-heading--weight, 600);
+    font-size: 1.3rem;
+    color: var(--color-foreground-heading);
+    margin: 0;
+  }
+
+  .hl-why__text {
+    font-family: var(--font-body--family);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.78;
+    margin: 0;
+  }
+
+  @media (max-width: 990px) { .hl-why__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .hl-why__grid { grid-template-columns: 1fr; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homelyte Why",
+  "tag": "section",
+  "class": "hl-section-wrapper",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Difference" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Why Homelyte" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-2" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "box", "label": "Box" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "check", "label": "Check" }
+          ],
+          "default": "leaf"
+        },
+        { "type": "image_picker", "id": "image", "label": "Custom icon (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Premium Materials" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Crafted from durable, high-grade materials built for daily life." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homelyte Why",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "leaf", "title": "Premium Materials", "text": "Crafted from durable, high-grade materials built for daily life." } },
+        { "type": "feature", "settings": { "icon": "shield", "title": "Food Grade Safe", "text": "BPA-free and food-safe, so your essentials stay pure and protected." } },
+        { "type": "feature", "settings": { "icon": "box", "title": "Space Saving", "text": "Smart, stackable designs that make the most of every corner." } },
+        { "type": "feature", "settings": { "icon": "clock", "title": "Designed to Last", "text": "Timeless, sturdy products engineered for years of everyday use." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -9,240 +9,360 @@
  */
 {
   "sections": {
-    "hero_iLBwPd": {
-      "type": "hero",
+    "hero": {
+      "type": "homelyte-hero",
+      "settings": {
+        "eyebrow": "Premium Home Organization",
+        "heading": "Organize Better. Live Better.",
+        "description": "<p>Premium home organization solutions designed for modern Indian homes.</p>",
+        "button_label": "Shop Collection",
+        "button_link": "shopify://collections/all",
+        "button_label_2": "Explore Kitchen",
+        "button_link_2": "",
+        "image": "shopify://shop_images/ChatGPT_Image_Jun_28_2026_11_52_02_PM.png",
+        "image_mobile": "shopify://shop_images/ChatGPT_Image_Jun_28_2026_11_55_04_PM_2.png",
+        "content_alignment": "left",
+        "color_scheme": "scheme-79cf3de2-914d-4b09-a2ac-58e79fb13e29",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "categories": {
+      "type": "homelyte-category-circles",
       "blocks": {
-        "group_mATTUY": {
-          "type": "group",
-          "name": "t:names.group",
+        "c1": {
+          "type": "category",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
+            "title": "Kitchen",
+            "link": "shopify://collections/all"
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "title": "Bathroom",
+            "link": "shopify://collections/all"
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "title": "Storage",
+            "link": "shopify://collections/all"
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "title": "Laundry",
+            "link": "shopify://collections/all"
+          }
+        },
+        "c5": {
+          "type": "category",
+          "settings": {
+            "title": "Pantry",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "settings": {
+        "eyebrow": "Find Your Space",
+        "heading": "Shop by Category",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "featured": {
+      "type": "homelyte-product-grid",
+      "blocks": {
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
             "inherit_color_scheme": true,
             "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "group_U86Qji": {
-              "type": "group",
-              "name": "t:names.group",
+            "product-card-gallery": {
+              "type": "_product-card-gallery",
               "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 0,
-                "width": "custom",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
+                "image_ratio": "portrait",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
                 "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "text_nptTQe": {
-                  "type": "text",
-                  "name": "Heading",
-                  "settings": {
-                    "text": "<h2><em>Introducing</em></h2>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "custom",
-                    "font": "var(--font-accent--family)",
-                    "font_size": "1.5rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "text_m9AcWC": {
-                  "type": "text",
-                  "settings": {
-                    "text": "<h1>Our Newest Arrivals </h1>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h2",
-                    "font": "var(--font-primary--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_nptTQe",
-                "text_m9AcWC"
-              ]
-            },
-            "text_ebNxhf": {
-              "type": "text",
-              "name": "Text",
-              "settings": {
-                "text": "<p>Bring order to the chaos. When all your tech essentials have a dedicated spot on your desk, you don’t have to waste any time searching for them. </p>",
-                "width": "fit-content",
-                "max_width": "none",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "product_title": {
+              "type": "product-title",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 12,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "paragraph",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "swatches": {
+              "type": "swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "group_U86Qji",
-            "text_ebNxhf"
+            "product-card-gallery",
+            "product_title",
+            "price",
+            "swatches"
           ]
         }
       },
-      "block_order": [
-        "group_mATTUY"
-      ],
-      "name": "t:names.hero",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 16,
-        "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-5",
-        "toggle_overlay": true,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 0,
-        "padding-block-end": 31
+        "eyebrow": "Customer Favourites",
+        "heading": "Featured Collection",
+        "collection": "all",
+        "products_to_show": 4,
+        "layout": "slider",
+        "columns": 4,
+        "button_label": "View all",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
-    "product_list_EDUBdR": {
-      "type": "product-list",
+    "before_after": {
+      "type": "homelyte-before-after",
+      "settings": {
+        "eyebrow": "The Homelyte Effect",
+        "heading": "Transform Your Home",
+        "subtitle": "<p>Simple products. Beautiful spaces. Drag to see the difference.</p>",
+        "button_label": "Shop Solutions",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "scheme-3",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "why": {
+      "type": "homelyte-why",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "Premium Materials",
+            "text": "Crafted from durable, high-grade materials built for daily life."
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Food Grade Safe",
+            "text": "BPA-free and food-safe, so your essentials stay pure and protected."
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "box",
+            "title": "Space Saving",
+            "text": "Smart, stackable designs that make the most of every corner."
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "icon": "clock",
+            "title": "Designed to Last",
+            "text": "Timeless, sturdy products engineered for years of everyday use."
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4"
+      ],
+      "settings": {
+        "eyebrow": "The Difference",
+        "heading": "Why Homelyte",
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "kitchen": {
+      "type": "homelyte-editorial",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "2-in-1 Oil Dispenser"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "Convertible Spice Organizer"
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "Rolling Egg Storage"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "eyebrow": "Kitchen Essentials",
+        "heading": "A calmer, clutter-free kitchen",
+        "text": "<p>Thoughtful organizers that bring order to your countertops, drawers and pantry.</p>",
+        "media_position": "left",
+        "button_label": "Shop Kitchen",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "bathroom": {
+      "type": "homelyte-editorial",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "Under Sink Organizer"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "Bathroom Organizer"
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "Soap Holder"
+          }
+        },
+        "p4": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "title": "Storage Basket"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "settings": {
+        "eyebrow": "Bathroom Essentials",
+        "heading": "Bring spa-like calm to your bathroom",
+        "text": "<p>Space-smart organizers that keep every essential tidy and within reach.</p>",
+        "media_position": "right",
+        "button_label": "Shop Bathroom",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "scheme-3",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "bestsellers": {
+      "type": "homelyte-product-grid",
+      "blocks": {
+        "static-product-card": {
+          "type": "_product-card",
           "static": true,
           "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
+            "product_card_gap": 8,
             "inherit_color_scheme": true,
             "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
@@ -253,58 +373,8 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_list_text_qK4EWG": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>Make Your Workspace Yours</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_qK4EWG"
-          ]
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 0,
-            "inherit_color_scheme": false,
-            "color_scheme": "scheme-79cf3de2-914d-4b09-a2ac-58e79fb13e29",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 10,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_hpki3q": {
+            "product-card-gallery": {
               "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
               "settings": {
                 "image_ratio": "square",
                 "border": "none",
@@ -318,374 +388,13 @@
               },
               "blocks": {}
             },
-            "group_jHUdWN": {
-              "type": "_product-card-group",
-              "name": "t:names.group",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 4,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "link": "",
-                "open_in_new_tab": false,
-                "padding-block-start": 24,
-                "padding-block-end": 24,
-                "padding-inline-start": 24,
-                "padding-inline-end": 24
-              },
-              "blocks": {
-                "product_title_gH3cpy": {
-                  "type": "product-title",
-                  "name": "t:names.product_title",
-                  "settings": {
-                    "width": "fit-content",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "paragraph",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_anAima": {
-                  "type": "price",
-                  "name": "t:names.product_price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "color": "var(--color-foreground)",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "swatches_eYcKAz": {
-                  "type": "swatches",
-                  "name": "t:names.swatches",
-                  "settings": {
-                    "product_swatches_alignment": "flex-start",
-                    "product_swatches_alignment_mobile": "flex-start",
-                    "hide_padding": false,
-                    "product_swatches_padding_top": 4,
-                    "product_swatches_padding_bottom": 0,
-                    "product_swatches_padding_left": 0,
-                    "product_swatches_padding_right": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "product_title_gH3cpy",
-                "price_anAima",
-                "swatches_eYcKAz"
-              ]
-            }
-          },
-          "block_order": [
-            "product_card_gallery_hpki3q",
-            "group_jHUdWN"
-          ]
-        }
-      },
-      "name": "Featured collection",
-      "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": true,
-        "max_products": 3,
-        "columns": 3,
-        "mobile_columns": "1",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 12,
-        "rows_gap": 12,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "color_scheme": "scheme-79cf3de2-914d-4b09-a2ac-58e79fb13e29",
-        "padding-block-start": 48,
-        "padding-block-end": 64
-      }
-    },
-    "media_with_content_LfPdEJ": {
-      "type": "media-with-content",
-      "blocks": {
-        "media": {
-          "type": "_media-without-appearance",
-          "static": true,
-          "settings": {
-            "media_type": "video",
-            "link": "",
-            "video_loop": true,
-            "video_autoplay": true,
-            "image_position": "cover",
-            "video_position": "cover"
-          },
-          "blocks": {}
-        },
-        "content": {
-          "type": "_content-without-appearance",
-          "static": true,
-          "settings": {
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 24
-          },
-          "blocks": {
-            "image_y4ApqF": {
-              "type": "image",
-              "name": "t:names.image",
-              "settings": {
-                "link": "",
-                "image_ratio": "adapt",
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_Hf79zK": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h2>Productivity Essentials</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_jxGhdJ": {
-              "type": "text",
-              "settings": {
-                "text": "<p>Objects that partner with your digital tools so you can focus on your most important work.</p>",
-                "width": "fit-content",
-                "max_width": "narrow",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_zg4nUF": {
-              "type": "button",
-              "settings": {
-                "label": "Shop Now",
-                "link": "shopify://collections/all",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "image_y4ApqF",
-            "text_Hf79zK",
-            "text_jxGhdJ",
-            "button_zg4nUF"
-          ]
-        }
-      },
-      "name": "t:names.media_with_text",
-      "settings": {
-        "media_position": "left",
-        "media_width": "medium",
-        "media_height": "50svh",
-        "section_width": "page-width",
-        "extend_media": true,
-        "color_scheme": "scheme-5",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "collection_list_xpBxCm": {
-      "type": "collection-list",
-      "blocks": {
-        "group_mfTd9p": {
-          "type": "group",
-          "name": "t:names.header",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "center",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 16,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 0,
-            "padding-block-end": 16,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "text_AYrwfM": {
-              "type": "text",
-              "name": "t:names.text",
-              "settings": {
-                "text": "<h2>Shop by Collection</h2>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h2",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "text_AYrwfM"
-          ]
-        },
-        "static-collection-card": {
-          "type": "_collection-card",
-          "name": "t:names.collection_card",
-          "static": true,
-          "settings": {
-            "placement": "on_image",
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "flex-start",
-            "collection_card_gap": 8,
-            "inherit_color_scheme": true,
-            "color_scheme": "scheme-6",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 10
-          },
-          "blocks": {
-            "collection_title_zyBdAJ": {
-              "type": "collection-title",
-              "name": "t:names.collection_title",
+            "product_title": {
+              "type": "product-title",
               "settings": {
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "h5",
+                "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -696,6 +405,28 @@
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
+                "padding-block-start": 12,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "paragraph",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -703,58 +434,285 @@
               },
               "blocks": {}
             },
-            "collection-card-image": {
-              "type": "_collection-card-image",
-              "static": true,
+            "swatches": {
+              "type": "swatches",
               "settings": {
-                "image_ratio": "portrait",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
               },
               "blocks": {}
             }
           },
           "block_order": [
-            "collection_title_zyBdAJ"
+            "product-card-gallery",
+            "product_title",
+            "price",
+            "swatches"
           ]
         }
       },
-      "block_order": [
-        "group_mfTd9p"
-      ],
-      "disabled": true,
-      "name": "Collection list",
       "settings": {
-        "collection_list": [],
-        "layout_type": "bento",
-        "carousel_on_mobile": true,
+        "eyebrow": "Loved by thousands",
+        "heading": "Best Sellers",
+        "collection": "all",
+        "products_to_show": 10,
+        "layout": "slider",
         "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 16,
-        "bento_gap": 12,
-        "rows_gap": 16,
-        "max_collections": 4,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "gap": 12,
-        "color_scheme": "",
-        "padding-block-start": 48,
-        "padding-block-end": 64
+        "button_label": "Shop all best sellers",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "video": {
+      "type": "homelyte-video",
+      "settings": {
+        "eyebrow": "Watch",
+        "heading": "Organization feels beautiful.",
+        "button_label": "Watch More",
+        "button_link": "",
+        "overlay_opacity": 35,
+        "height": 72,
+        "color_scheme": "scheme-5",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "bundles": {
+      "type": "homelyte-bundles",
+      "blocks": {
+        "b1": {
+          "type": "bundle",
+          "settings": {
+            "badge": "Save 15%",
+            "title": "Kitchen Bundle",
+            "items": "<ul><li>Oil Bottle</li><li>Spice Organizer</li><li>Egg Holder</li></ul>",
+            "price": "₹2,799",
+            "compare_price": "₹3,297",
+            "button_label": "Shop Bundle",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "b2": {
+          "type": "bundle",
+          "settings": {
+            "badge": "Save 15%",
+            "title": "Bathroom Bundle",
+            "items": "<ul><li>Under Sink Organizer</li><li>Storage Basket</li></ul>",
+            "price": "₹3,199",
+            "compare_price": "₹3,764",
+            "button_label": "Shop Bundle",
+            "button_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "eyebrow": "Buy More, Save More",
+        "heading": "Bundle & Save",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "reviews": {
+      "type": "homelyte-reviews",
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Completely transformed my kitchen. Everything finally has its place!",
+            "name": "Aisha M.",
+            "verified": true
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Premium quality and so easy to clean. Worth every rupee.",
+            "name": "Rohan K.",
+            "verified": true
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Our tiny apartment feels twice as big now. Obsessed!",
+            "name": "Neha & Arjun",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "eyebrow": "Loved by 50,000+ homes",
+        "heading": "Real Homes, Real Results",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "instagram": {
+      "type": "homelyte-instagram",
+      "blocks": {
+        "g1": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        },
+        "g2": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        },
+        "g3": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        },
+        "g4": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        },
+        "g5": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        },
+        "g6": {
+          "type": "post",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5",
+        "g6"
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Follow the Homelyte Life",
+        "handle": "@homelyte",
+        "follow_label": "Follow us on Instagram",
+        "follow_link": "https://instagram.com",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "faq": {
+      "type": "homelyte-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders ship within 24 hours and arrive in 3–5 business days. Free shipping above ₹999.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "What is your returns policy?",
+            "answer": "<p>Enjoy 7 days easy returns on unused items in original packaging.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "What materials are used?",
+            "answer": "<p>Our products use premium, food-grade, BPA-free materials built to last.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I clean my products?",
+            "answer": "<p>Most products are easy to wipe clean or top-rack dishwasher safe. Check each product page for details.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "Is there a warranty?",
+            "answer": "<p>Yes — all Homelyte products come with a quality assurance warranty against manufacturing defects.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "eyebrow": "Good to Know",
+        "heading": "Frequently Asked Questions",
+        "subtext": "<p>Everything you need to know about ordering, shipping and caring for your Homelyte products.</p>",
+        "open_first": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "newsletter": {
+      "type": "homelyte-newsletter",
+      "settings": {
+        "eyebrow": "10% OFF Your First Order",
+        "heading": "Join the Homelyte Family",
+        "subtext": "<p>Get 10% off your first order, plus early access to new drops and organizing tips.</p>",
+        "placeholder": "Enter your email",
+        "button_label": "Subscribe",
+        "success_text": "You're in! Check your inbox for your 10% off code.",
+        "disclaimer": "No spam. Unsubscribe anytime.",
+        "color_scheme": "scheme-3",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     }
   },
   "order": [
-    "hero_iLBwPd",
-    "product_list_EDUBdR",
-    "media_with_content_LfPdEJ",
-    "collection_list_xpBxCm"
+    "hero",
+    "categories",
+    "featured",
+    "before_after",
+    "why",
+    "kitchen",
+    "bathroom",
+    "bestsellers",
+    "video",
+    "bundles",
+    "reviews",
+    "instagram",
+    "faq",
+    "newsletter"
   ]
 }

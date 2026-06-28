@@ -1,0 +1,196 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div
+  class="hl-edit hl-section color-{{ s.color_scheme }} hl-edit--media-{{ s.media_position }}"
+  style="--hl-pt: {{ s.padding_top }}px; --hl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="hl-container hl-edit__layout">
+    <div class="hl-edit__media" data-hl-reveal>
+      {%- if s.image != blank -%}
+        {{
+          s.image
+          | image_url: width: 1600
+          | image_tag:
+            loading: 'lazy',
+            widths: '600, 900, 1200, 1600',
+            sizes: '(min-width: 750px) 50vw, 100vw',
+            class: 'hl-edit__img',
+            alt: s.image.alt | default: s.heading | strip_html
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'hl-edit__img' }}
+      {%- endif -%}
+    </div>
+
+    <div class="hl-edit__content" data-hl-reveal style="--hl-reveal-delay: 120ms;">
+      {%- if s.eyebrow != blank -%}<span class="hl-eyebrow">{{ s.eyebrow }}</span>{%- endif -%}
+      {%- if s.heading != blank -%}<h2 class="hl-heading hl-heading--lg">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<div class="hl-text hl-edit__text">{{ s.text }}</div>{%- endif -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="hl-edit__products" role="list">
+          {%- for block in section.blocks -%}
+            {%- assign p = block.settings.product -%}
+            <li class="hl-edit__product" {{ block.shopify_attributes }}>
+              <a class="hl-edit__product-link" href="{{ p.url | default: '#' }}">
+                <span class="hl-edit__thumb">
+                  {%- if p.featured_media != blank -%}
+                    {{ p.featured_media | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100,160,200', class: 'hl-edit__thumb-img', alt: p.title }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'hl-edit__thumb-img' }}
+                  {%- endif -%}
+                </span>
+                <span class="hl-edit__product-info">
+                  <span class="hl-edit__product-title">{{ block.settings.title | default: p.title | default: 'Product' }}</span>
+                  {%- if p != blank -%}<span class="hl-edit__product-price">{{ p.price | money }}</span>{%- endif -%}
+                </span>
+                <span class="hl-edit__product-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if s.button_label != blank -%}
+        <a class="hl-btn hl-btn--primary hl-edit__btn" href="{{ s.button_link | default: '#' }}">{{ s.button_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hl-edit__layout {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(28px, 5vw, 80px);
+    align-items: center;
+  }
+
+  .hl-edit--media-right .hl-edit__media { order: 2; }
+
+  .hl-edit__media {
+    border-radius: var(--hl-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--hl-shadow-md);
+  }
+
+  .hl-edit__img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.9s var(--hl-ease);
+  }
+
+  .hl-edit__media:hover .hl-edit__img { transform: scale(1.04); }
+
+  .hl-edit__content { display: flex; flex-direction: column; gap: 1.1rem; align-items: flex-start; }
+  .hl-edit__text { max-width: 46ch; }
+
+  .hl-edit__products {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hl-edit__product-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem;
+    border-radius: var(--hl-radius);
+    text-decoration: none;
+    color: var(--color-foreground);
+    border: 1px solid transparent;
+    transition: background-color 0.3s var(--hl-ease), border-color 0.3s var(--hl-ease), transform 0.3s var(--hl-ease);
+  }
+
+  .hl-edit__product-link:hover {
+    background: var(--color-background);
+    border-color: var(--color-border);
+    transform: translateX(4px);
+  }
+
+  .hl-edit__thumb {
+    flex: 0 0 auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--hl-light-green);
+  }
+
+  .hl-edit__thumb-img { width: 100%; height: 100%; object-fit: cover; }
+
+  .hl-edit__product-info { display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; }
+  .hl-edit__product-title { font-family: var(--font-body--family); font-weight: 600; font-size: 1rem; }
+  .hl-edit__product-price { font-size: 0.9rem; opacity: 0.7; }
+  .hl-edit__product-arrow { color: var(--color-primary); display: grid; place-items: center; }
+  .hl-edit__product-arrow svg { width: 20px; height: 20px; }
+  .hl-edit__btn { margin-top: 0.75rem; }
+
+  @media (max-width: 749px) {
+    .hl-edit__layout { grid-template-columns: 1fr; }
+    .hl-edit--media-right .hl-edit__media { order: 0; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homelyte Editorial",
+  "tag": "section",
+  "class": "hl-section-wrapper",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Kitchen Essentials" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "A calmer, clutter-free kitchen" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Thoughtful organizers that bring order to your countertops, drawers and pantry.</p>" },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    { "type": "image_picker", "id": "image", "label": "Lifestyle image" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Kitchen" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "title", "label": "Custom label (optional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homelyte Editorial",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

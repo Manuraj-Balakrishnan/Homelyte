@@ -1,0 +1,169 @@
+{%- liquid
+  assign s = section.settings
+-%}
+
+<div
+  class="hl-ba hl-section color-{{ s.color_scheme }}"
+  style="--hl-pt: {{ s.padding_top }}px; --hl-pb: {{ s.padding_bottom }}px;"
+>
+  <div class="hl-container hl-ba__layout">
+    <div class="hl-ba__content" data-hl-reveal>
+      {%- if s.eyebrow != blank -%}<span class="hl-eyebrow">{{ s.eyebrow }}</span>{%- endif -%}
+      {%- if s.heading != blank -%}<h2 class="hl-heading hl-heading--lg">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.subtitle != blank -%}<div class="hl-text hl-ba__subtitle">{{ s.subtitle }}</div>{%- endif -%}
+      {%- if s.button_label != blank -%}
+        <a class="hl-btn hl-btn--primary hl-ba__btn" href="{{ s.button_link | default: '#' }}">{{ s.button_label }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="hl-ba__compare" data-hl-compare data-hl-reveal style="--hl-reveal-delay: 120ms;">
+      <div class="hl-ba__img hl-ba__img--before">
+        {%- if s.image_before != blank -%}
+          {{ s.image_before | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600,900,1200,1400', sizes: '(min-width:990px) 50vw, 100vw', alt: 'Before — cluttered space' }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: '' }}
+        {%- endif -%}
+        <span class="hl-ba__tag hl-ba__tag--before">Before</span>
+      </div>
+      <div class="hl-ba__img hl-ba__img--after" data-hl-compare-after>
+        {%- if s.image_after != blank -%}
+          {{ s.image_after | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '600,900,1200,1400', sizes: '(min-width:990px) 50vw, 100vw', alt: 'After — organized with Homelyte' }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: '' }}
+        {%- endif -%}
+        <span class="hl-ba__tag hl-ba__tag--after">After</span>
+      </div>
+      <div class="hl-ba__divider" aria-hidden="true"><span class="hl-ba__handle"></span></div>
+      <input
+        class="hl-ba__range"
+        type="range"
+        min="0"
+        max="100"
+        value="50"
+        data-hl-compare-range
+        aria-label="Drag to compare before and after"
+      >
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .hl-ba__layout {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: center;
+  }
+
+  .hl-ba__content { display: flex; flex-direction: column; gap: 1.1rem; align-items: flex-start; }
+  .hl-ba__subtitle { max-width: 42ch; }
+  .hl-ba__btn { margin-top: 0.5rem; }
+
+  .hl-ba__compare {
+    --hl-compare-pos: 50%;
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--hl-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--hl-shadow-md);
+    user-select: none;
+  }
+
+  .hl-ba__img { position: absolute; inset: 0; }
+  .hl-ba__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .hl-ba__img--after {
+    clip-path: inset(0 0 0 var(--hl-compare-pos, 50%));
+  }
+
+  .hl-ba__tag {
+    position: absolute;
+    bottom: 16px;
+    font-family: var(--font-body--family);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--hl-radius-pill);
+    background: rgb(17 17 17 / 70%);
+    color: #fff;
+    backdrop-filter: blur(4px);
+  }
+
+  .hl-ba__tag--before { left: 16px; }
+  .hl-ba__tag--after { right: 16px; background: var(--hl-green); }
+
+  .hl-ba__divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--hl-compare-pos, 50%);
+    width: 2px;
+    background: #fff;
+    transform: translateX(-1px);
+    pointer-events: none;
+  }
+
+  .hl-ba__handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: var(--hl-shadow-md);
+  }
+
+  .hl-ba__handle::before,
+  .hl-ba__handle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-block: 5px solid transparent;
+  }
+
+  .hl-ba__handle::before { left: 11px; border-right: 7px solid var(--hl-green); transform: translateY(-50%); }
+  .hl-ba__handle::after { right: 11px; border-left: 7px solid var(--hl-green); transform: translateY(-50%); }
+
+  .hl-ba__range {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: ew-resize;
+  }
+
+  @media (max-width: 749px) {
+    .hl-ba__layout { grid-template-columns: 1fr; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Homelyte Before / After",
+  "tag": "section",
+  "class": "hl-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Homelyte Effect" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Transform Your Home" },
+    { "type": "richtext", "id": "subtitle", "label": "Subtitle", "default": "<p>Simple products. Beautiful spaces. Drag to see the difference.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Solutions" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "image_before", "label": "Before image (messy)" },
+    { "type": "image_picker", "id": "image_after", "label": "After image (organized)" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-3" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 5, "unit": "px", "default": 90 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 5, "unit": "px", "default": 90 }
+  ],
+  "presets": [{ "name": "Homelyte Before / After" }]
+}
+{% endschema %}
