@@ -26,8 +26,10 @@
 
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
+    {{ 'homelyte.css' | asset_url | stylesheet_tag }}
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
+    <script src="{{ 'homelyte.js' | asset_url }}" defer="defer"></script>
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
 

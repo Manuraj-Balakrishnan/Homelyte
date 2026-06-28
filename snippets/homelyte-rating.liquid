@@ -1,0 +1,36 @@
+{%- doc -%}
+  Renders an accessible star rating row for Homelyte cards.
+
+  @param {number} [rating] - Rating value 0-5. Defaults to 5.
+  @param {number} [count] - Optional number of reviews to display.
+  @param {object} [product] - Optional product; reads `reviews` metafields when present.
+
+  @example
+  {% render 'homelyte-rating', rating: 4.5, count: 128 %}
+{%- enddoc -%}
+
+{%- liquid
+  assign hl_rating = rating | default: 5
+  assign hl_count = count
+
+  if product != blank and product.metafields.reviews.rating.value != blank
+    assign hl_rating = product.metafields.reviews.rating.value.rating
+    assign hl_count = product.metafields.reviews.rating_count
+  endif
+
+  assign hl_rating_rounded = hl_rating | times: 1.0 | round
+  assign rating_label = hl_rating | append: ' out of 5 stars'
+-%}
+
+<span class="hl-stars" role="img" aria-label="{{ rating_label }}">
+  {%- for i in (1..5) -%}
+    {%- if i <= hl_rating_rounded -%}
+      <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.86l-5.2 2.74.99-5.79L1.58 7.6l5.82-.85L10 1.5z"/></svg>
+    {%- else -%}
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1.99 5.79L10 14.86l-5.2 2.74.99-5.79L1.58 7.6l5.82-.85L10 1.5z"/></svg>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if hl_count != blank and hl_count != 0 -%}
+    <span class="hl-stars__count">({{ hl_count }})</span>
+  {%- endif -%}
+</span>
