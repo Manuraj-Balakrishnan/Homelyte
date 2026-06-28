@@ -168,6 +168,7 @@
         "payment_icons_GPijqk": {
           "type": "payment-icons",
           "name": "t:names.payment_icons",
+          "disabled": true,
           "settings": {
             "horizontal_alignment": "center",
             "gap": 10,
