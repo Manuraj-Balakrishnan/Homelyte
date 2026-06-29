@@ -206,6 +206,8 @@
         "subtitle": "<p>Simple products. Beautiful spaces. Drag to see the difference.</p>",
         "button_label": "Shop Solutions",
         "button_link": "shopify://collections/all",
+        "image_before": "shopify://shop_images/ChatGPT_Image_Jun_29_2026_11_26_05_AM.png",
+        "image_after": "shopify://shop_images/ChatGPT_Image_Jun_29_2026_11_24_42_AM.png",
         "color_scheme": "scheme-3",
         "padding_top": 40,
         "padding_bottom": 40
